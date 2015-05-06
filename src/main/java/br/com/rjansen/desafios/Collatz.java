@@ -74,7 +74,7 @@ public class Collatz {
 	 * @param posivelNumero - Representação textual de um inteiro longo
 	 * @return true se for um inteiro longo e false caso contrário
 	 */
-	public static boolean eInteiroLongo(String posivelNumero) {
+	public static boolean isInteiroLongo(String posivelNumero) {
 		try {
 			Long.parseLong(posivelNumero);
 			return true;
@@ -93,16 +93,14 @@ public class Collatz {
 	public static void main(String[] args) {
 		final long startTime = currentTimeMillis();
 		final Long valorInicialCollatz;
-		if (args.length < 1 || args[1] == null || !eInteiroLongo(args[1])) {
+		if (args.length < 1 || args[0] == null || !isInteiroLongo(args[0])) {
 			printUsage();
 			return;
 		} else {
-			valorInicialCollatz = Long.parseLong(args[1]);
+			valorInicialCollatz = Long.parseLong(args[0]);
 		}
-		out.println("--- ** Conjectura de Collatz - Analise do numero com a maior sequencia ** ---");
-		out.printf("- Numero Inicial: %s\n", valorInicialCollatz);
-		out.println("--- ** Aguarde ... Calculando as sequencias ** ---");
-
+		out.println("****** Conjectura de Collatz - Analise do numero com a maior sequencia ******");
+		out.println("****** Aguarde ... Calculando as sequencias ******");
 		final Collatz collatz = new Collatz();
 		Long valorInicialMaiorSequencia = 0L, tamanhoMaiorSequencia = 0L;
 		List<Long> maiorSequencia = new ArrayList<>();
@@ -115,9 +113,9 @@ public class Collatz {
 			}
 			collatz.limpaSequenciaGerada();
 		}
-		out.printf("- Numero com Maior Sequencia Gerada: \n\tNumero=%s \n\tTamanhoSequencia=%s \n\tSequencia=%s\n", valorInicialMaiorSequencia, tamanhoMaiorSequencia, maiorSequencia);
+		out.printf("Numero com Maior Sequencia Gerada: \n\tNumero Inicial=%s \n\tNumero com Maior Sequencia=%s \n\tTamanho da Sequencia=%s \n\tSequencia=%s\n", valorInicialCollatz, valorInicialMaiorSequencia, tamanhoMaiorSequencia, maiorSequencia);
 		final long endTime = currentTimeMillis();
-		out.printf("- Tempo Execucao Collatz: %dms\n", endTime - startTime);
+		out.printf("****** Tempo Execucao Collatz: %dms ******\n", endTime - startTime);
 	}
 
 }
