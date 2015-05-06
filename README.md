@@ -28,7 +28,7 @@ Onde:
 - n precisa ser um numero inteiro valido
 
 Onde:
-- <cadeia>=1,20,-3,4000,n
+- [cadeia]=1,20,-3,4000,n
 - n precisa ser um numero inteiro valido
 
 Conjectura de Collatz:
@@ -39,6 +39,6 @@ Onde:
 - n precisa ser um numero inteiro longo valido
 
 Sistema Robô:
-java br.com.rjansen.desafios.SistemaRobo [arquivo_comandos]
+- java br.com.rjansen.desafios.SistemaRobo [arquivo_comandos]
 Onde:
 - [arquivo_comandos]=/caminho_arquivo/comandos
