@@ -5,7 +5,6 @@ import static java.lang.System.out;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 /**
  * @author raphaeljansen
@@ -36,7 +35,7 @@ public class Collatz {
 	
 	/**
 	 * Retorna uma cópia da sequencia gerada.
-	 * @return - List<Long> - Lista de inteiros longos que representa a sequencia gerada
+	 * @return List<Long> - Lista de inteiros longos que representa a sequencia gerada
 	 */
 	public List<Long> getSequenciaGerada() {
 		return new ArrayList<Long>(sequenciaGerada);
@@ -53,34 +52,12 @@ public class Collatz {
 	 * Ececuta a conjectura de Collatz no número informado
 	 * @param numero - Numero aonde será aplicada a função
 	 */
-	public void executa(Long numero) {
-		sequenciaGerada.add(numero);
-//		if (numero.equals(936276569)) {
-//			System.out.println("Stop");
-//		}
-//		out.print(numero + " ");
-		if (numero == 1) {
-			//out.println();
-			return;
-		}
-		if (numero % 2 == 0) {
-			executa(numero / 2);
-		} else {
-			executa(3 * numero + 1);
-		}
-	}
-	
-	public void executaSemRecursao(Long numeroInicial) {
+	public void executa(Long numeroInicial) {
 		sequenciaGerada.clear();
 		Long numero = numeroInicial;
 		while(true) {
 			sequenciaGerada.add(numero);
-//			if (numero.equals(936276569)) {
-//				System.out.println("Stop");
-//			}
-//			out.print(numero + " ");
 			if (numero == 1) {
-				//out.println();
 				break;
 			}
 			if (numero % 2 == 0) {
@@ -91,13 +68,6 @@ public class Collatz {
 		}
 	}
 
-	/**
-	 * Imprime um exemplo de chamada da classe
-	 */
-	public static void printUsage() {
-		out.println("Use: java br.com.rjansen.desafios.Collatz <numero_inicial_collatz>");
-	}
-	
 	/**
 	 * Tenta converter a string possivelNumero em um inteiro. Se conseguir retorna true caso contrário retorna false.
 	 *  
@@ -113,30 +83,31 @@ public class Collatz {
 		}
 	}
 	
+	/**
+	 * Imprime um exemplo de chamada da classe
+	 */
+	public static void printUsage() {
+		out.println("Use: java br.com.rjansen.desafios.Collatz <numero_inicial_collatz>\n<numero_inicial_collatz>=n\nn precisa ser um numero inteiro longo valido");
+	}
+	
 	public static void main(String[] args) {
 		final long startTime = currentTimeMillis();
-//		out.println(args.length);
-//		for (String arg : args) {
-//			out.println(arg);
-//		}
 		final Long valorInicialCollatz;
 		if (args.length < 1 || args[1] == null || !eInteiroLongo(args[1])) {
-			//printUsage();
-			//return;
-			valorInicialCollatz = 63728127L;
-			//valorInicialCollatz = 1000000L;
+			printUsage();
+			return;
 		} else {
 			valorInicialCollatz = Long.parseLong(args[1]);
 		}
-		out.println("--- ** Conjectura de Collatz ** ---");
+		out.println("--- ** Conjectura de Collatz - Analise do numero com a maior sequencia ** ---");
 		out.printf("- Numero Inicial: %s\n", valorInicialCollatz);
-		
+		out.println("--- ** Aguarde ... Calculando as sequencias ** ---");
+
 		final Collatz collatz = new Collatz();
 		Long valorInicialMaiorSequencia = 0L, tamanhoMaiorSequencia = 0L;
 		List<Long> maiorSequencia = new ArrayList<>();
 		for (long k = valorInicialCollatz; k > 0; k--) {
 			collatz.executa(k);
-			//out.printf("CollatzResultado: ValorInicial=%d TamanhoSequencia=%d\n", k, collatz.getSequenciaGerada().size());
 			if (tamanhoMaiorSequencia < collatz.getSequenciaGerada().size()) {
 				tamanhoMaiorSequencia = new Long(collatz.getSequenciaGerada().size());
 				valorInicialMaiorSequencia = k;
@@ -146,7 +117,7 @@ public class Collatz {
 		}
 		out.printf("- Numero com Maior Sequencia Gerada: \n\tNumero=%s \n\tTamanhoSequencia=%s \n\tSequencia=%s\n", valorInicialMaiorSequencia, tamanhoMaiorSequencia, maiorSequencia);
 		final long endTime = currentTimeMillis();
-		out.printf("- TempoExecucaoCollatz: %dms\n", endTime - startTime);
+		out.printf("- Tempo Execucao Collatz: %dms\n", endTime - startTime);
 	}
 
 }

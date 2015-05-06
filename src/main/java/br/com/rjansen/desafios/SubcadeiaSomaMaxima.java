@@ -1,66 +1,133 @@
 package br.com.rjansen.desafios;
 
-import static java.lang.System.out;
 import static java.lang.System.currentTimeMillis;
+import static java.lang.System.out;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * @author raphaeljansen
+ *
+ * Classe reponsável por resolver o desafio sobre a Subcadeia de soma maxima.
+ * Desafio proposto:
+ * 
+ *  Dado um conjunto de números, descobrir o subconjunto em que a soma dos elementos são de máxima soma.
+ *   
+ *  Exemplo: dado o conjunto de elementos 
+ *  [2, -4, 6, 8, -10, 100, -6, 5]
+ *  O subconjunto de soma máxima é:
+ *  [2, -4 [6, 8, -10, 100] -6, 5]
+ *  Assim, o programa deve retornar a posição do primeiro e do último elemento da subcadeia. Neste exemplo, as posições 2 e 5, considerando a primeira posição com índice 0.
+ */
 public class SubcadeiaSomaMaxima {
-	/*
-	 def forca_bruta(vetor):
-	    """
-	    Algoritmo de força bruta, complexidade O(n^3)
-	    """
-	    print "\nUsando algoritmo de força bruta"
-	
-	    soma_max = 0
-	    i = j = 0
-	
-	    for primeiro in range(len(vetor)):
-	
-	        for ultimo in range(primeiro,len(vetor)):
-	            soma = 0
-	
-	            for k in range(primeiro,ultimo+1):
-	                soma += vetor[k]
-	
-	            if soma > soma_max:
-	                soma_max = soma
-	                i = primeiro
-	                j = ultimo
-	
-	    return vetor[i:j+1]
-	
+
+	/**
+	 * @author raphaeljansen
+	 *
+	 * Classe de dados que representa o resultado da analise de uma cadeia
 	 */
-	public static List<Integer> subcadeiaSomaMaxima(List<Integer> cadeia) {
-		Integer maiorSoma = 0, i = 0, j = 0;
-		
-		for (int primeiro = 0; primeiro < cadeia.size(); primeiro ++) {
-			
-			for (int ultimo = 0; ultimo < cadeia.subList(primeiro, cadeia.size()).size(); ultimo ++) {
+	private static class ResultadoSubcadeiaMaxima {
+		private final Integer valorSoma;
+		private final List<Integer> subCadeia;
+		private final Integer posicaoInicialNaCadeia;
+		private final Integer posicaoFinalNaCadeia;
+
+		public ResultadoSubcadeiaMaxima(Integer valorSoma, 
+				Integer posicaoInicialNaCadeia, Integer posicaoFinalNaCadeia,
+				List<Integer> subCadeia) {
+			super();
+			this.valorSoma = valorSoma;
+			this.posicaoInicialNaCadeia = posicaoInicialNaCadeia;
+			this.posicaoFinalNaCadeia = posicaoFinalNaCadeia;
+			this.subCadeia = subCadeia;
+		}
+
+		public Integer getValorSoma() {
+			return valorSoma;
+		}
+
+		public List<Integer> getSubCadeia() {
+			return new ArrayList<>(subCadeia);
+		}
+
+		public Integer getPosicaoInicialNaCadeia() {
+			return posicaoInicialNaCadeia;
+		}
+
+		public Integer getPosicaoFinalNaCadeia() {
+			return posicaoFinalNaCadeia;
+		}
+
+		@Override
+		public String toString() {
+			return String
+					.format("ResultadoSubcadeiaMaxima [valorSoma=%s, subCadeia=%s, posicaoInicialNaCadeia=%s, posicaoFinalNaCadeia=%s]",
+							valorSoma, subCadeia, posicaoInicialNaCadeia,
+							posicaoFinalNaCadeia);
+		}
+
+	}
+
+	/**
+	 * Calcula qual é a subcadeia que tem maior valor na soma de seus items
+	 * 
+	 * @param cadeia - Sequencia de numero inteiros de onde se deseja extrair a subcadeia
+	 * @return ResultadoSubcadeiaMaxima - Retorna o valor da soma e a subcadeia
+	 */
+	public static ResultadoSubcadeiaMaxima calcula(List<Integer> cadeia) {
+		Integer maiorSoma = 0, inicioSequencia = 0, fimSequencia = 0;
+
+		for (int primeiro = 0; primeiro < cadeia.size(); primeiro++) {
+			for (int ultimo = 0; ultimo < cadeia.subList(primeiro,
+					cadeia.size()).size(); ultimo++) {
 				Integer soma = 0;
-				for (int k = primeiro; k < ultimo+1; k ++) {
+				for (int k = primeiro; k < ultimo + 1; k++) {
 					soma += cadeia.get(k);
 				}
-	            if (soma > maiorSoma) {
-	            	maiorSoma = soma;
-	                i = primeiro;
-	                j = ultimo;
-	            }
+				if (soma > maiorSoma) {
+					maiorSoma = soma;
+					inicioSequencia = primeiro;
+					fimSequencia = ultimo;
+				}
 			}
 		}
-		return cadeia.subList(i, j + 1);
+		return new ResultadoSubcadeiaMaxima(maiorSoma, inicioSequencia, fimSequencia, cadeia.subList(
+				inicioSequencia, fimSequencia + 1));
 	}
-	
+
+	/**
+	 * Imprime um exemplo de chamada da classe
+	 */
+	public static void printUsage() {
+		out.println("Use: java br.com.rjansen.desafios.SubcadeiaSomaMaxima <cadeia>\n<cadeia>=1,20,-3,4000,n\nn precisa ser um numero inteiro valido");
+	}
+
 	public static void main(String[] args) {
 		final long startTime = currentTimeMillis();
-		out.println("Subcadeia de soma máxima");
-		final List<Integer> cadeia = Arrays.asList(2, -4, 6, 8, -10, 100, -6, 5);
-		final List<Integer> subCadeiaSomaMaxima = subcadeiaSomaMaxima(cadeia);
-		out.println(subCadeiaSomaMaxima);
+		final List<Integer> cadeia;
+		if (args.length < 1 || args[1] == null) {
+			printUsage();
+			return;
+		} else {
+			cadeia = new ArrayList<>();
+			Arrays.stream(args[1].split(",")).mapToInt(Integer::valueOf)
+					.forEachOrdered(itemCadeia -> cadeia.add(itemCadeia));
+		}
+		out.println("--- ** Subcadeia de Soma Maxima - Analisa e demonstra a subsequencia que gera a maior soma ** ---");
+		out.printf("- Sequencia Inicial: %s\n", cadeia);
+		out.println("--- ** Aguarde ... Calculando os valores ** ---");
+		final ResultadoSubcadeiaMaxima resultadoSomaMaxima = calcula(cadeia);
+		out.printf("- Subcadeia com Maior Soma: \n\tCadeia=%s \n\tMaior Soma=%s \n\tPosicao Primeiro Elemento=%s \n\tPosicao Ultimo Elemento=%s \n\tSubcadeia=%s\n",
+										cadeia, resultadoSomaMaxima.getValorSoma(),
+										resultadoSomaMaxima.getPosicaoInicialNaCadeia(),
+										resultadoSomaMaxima.getPosicaoFinalNaCadeia(),
+										resultadoSomaMaxima.getSubCadeia());
 		final long endTime = currentTimeMillis();
-		out.printf("TempoExecucaoSubcadeiaSomaMaxima: %dms", endTime - startTime);		
+		out.printf("- Tempo Execucao Subcadeia Soma Maxima: %dms\n",
+				endTime - startTime);
+
 	}
 
 }
