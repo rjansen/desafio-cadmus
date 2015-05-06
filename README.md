@@ -28,10 +28,6 @@ Onde:
 - [cadeia]=1,20,-3,4000,n
 - n precisa ser um numero inteiro valido
 
-Onde:
-- [cadeia]=1,20,-3,4000,n
-- n precisa ser um numero inteiro valido
-
 Conjectura de Collatz:
 - java br.com.rjansen.desafios.Collatz [numero_inicial_collatz]
 
