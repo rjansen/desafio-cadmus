@@ -14,6 +14,7 @@ mvn clean install
 Para executar cada desafio faça:
 - utilize o shell de comandos e execute um cd para a pasta target na raiz do projeto.
 - O diretório corrente deve ser o desafio-cadmus
+
 Windows:
 - c:\desafio-cadmus>cd target\classes
 
