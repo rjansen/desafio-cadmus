@@ -14,7 +14,7 @@ mvn clean install
 Para executar cada desafio faça:
 - utilize o shell de comandos e execute um cd para a pasta target na raiz do projeto.
 Windows:
-- Diretório corrente: 
+- Diretório corrente:
 c:\desafio-cadmus>cd target\classes
 
 Baseados em Unix:
@@ -22,7 +22,13 @@ desafio-cadmus$ cd target/classes/
 
 Subcadeia de soma máxima:
 
+java br.com.rjansen.desafios.SubcadeiaSomaMaxima <cadeia>
+Onde:
+<cadeia>=1,20,-3,4000,n
+n precisa ser um numero inteiro valido
+
 Conjectura de Collatz:
+
 java br.com.rjansen.desafios.Collatz <numero_inicial_collatz>
 Onde
 <numero_inicial_collatz>=n
