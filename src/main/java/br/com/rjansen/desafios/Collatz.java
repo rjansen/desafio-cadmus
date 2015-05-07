@@ -9,39 +9,46 @@ import java.util.List;
 /**
  * @author raphaeljansen
  *
- * Classe reponsável por resolver o desafio sobre a Conjectura de Collatz.
- * Desafio proposto:
+ *         Classe reponsável por resolver o desafio sobre a Conjectura de
+ *         Collatz. Desafio proposto:
  * 
- *  Conjectura de Collatz
- *  
- *  A seguinte sequência iterativa é definida pelo conjunto de inteiros positivos onde:
+ *         Conjectura de Collatz
+ * 
+ *         A seguinte sequência iterativa é definida pelo conjunto de inteiros
+ *         positivos onde:
  *
- *  n = n/2 (se n é par) 
- *  n = 3n + 1 (se n é impar)
+ *         n = n/2 (se n é par) n = 3n + 1 (se n é impar)
  *
- *  Usando as regras acima e começando pelo número 13, nós geraríamos a seguinte sequência:
+ *         Usando as regras acima e começando pelo número 13, nós geraríamos a
+ *         seguinte sequência:
  *
- *  13 40 20 10 5 16 8 4 2 1
+ *         13 40 20 10 5 16 8 4 2 1
  *
- *  O que pode ser observado dessa sequência (começando no 13 e terminando no 1) é que ela contém 10 itens. Embora ainda não esteja matematicamente provado, é esperando que, dado um numero inteiro positivo qualquer, a sequencia sempre chegará em 1.
+ *         O que pode ser observado dessa sequência (começando no 13 e
+ *         terminando no 1) é que ela contém 10 itens. Embora ainda não esteja
+ *         matematicamente provado, é esperando que, dado um numero inteiro
+ *         positivo qualquer, a sequencia sempre chegará em 1.
  *
- *  Qual inteiro positivo abaixo de 1 milhão, produz a sequência com mais itens?
+ *         Qual inteiro positivo abaixo de 1 milhão, produz a sequência com mais
+ *         itens?
  *
- *  OBS: seu código precisa executar em menos de 5 segundos para o caso de 1 milhão.
+ *         OBS: seu código precisa executar em menos de 5 segundos para o caso
+ *         de 1 milhão.
  * 
  */
 public class Collatz {
-	
+
 	private final List<Long> sequenciaGerada = new ArrayList<>();
-	
+
 	/**
 	 * Retorna uma cópia da sequencia gerada.
+	 * 
 	 * @return List - Lista de inteiros longos que representa a sequencia gerada
 	 */
 	public List<Long> getSequenciaGerada() {
 		return new ArrayList<Long>(sequenciaGerada);
 	}
-	
+
 	/**
 	 * Limpa a lista que representa a última sequencia gerada.
 	 */
@@ -51,12 +58,14 @@ public class Collatz {
 
 	/**
 	 * Ececuta a conjectura de Collatz no número informado
-	 * @param numeroInicial - Numero aonde será aplicada a função
+	 * 
+	 * @param numeroInicial
+	 *            - Numero aonde será aplicada a função
 	 */
 	public void executa(Long numeroInicial) {
 		sequenciaGerada.clear();
 		Long numero = numeroInicial;
-		while(true) {
+		while (true) {
 			sequenciaGerada.add(numero);
 			if (numero == 1) {
 				break;
@@ -70,9 +79,11 @@ public class Collatz {
 	}
 
 	/**
-	 * Tenta converter a string possivelNumero em um inteiro. Se conseguir retorna true caso contrário retorna false.
-	 *  
-	 * @param posivelNumero - Representação textual de um inteiro longo
+	 * Tenta converter a string possivelNumero em um inteiro. Se conseguir
+	 * retorna true caso contrário retorna false.
+	 * 
+	 * @param posivelNumero
+	 *            - Representação textual de um inteiro longo
 	 * @return true se for um inteiro longo e false caso contrário
 	 */
 	private static boolean isInteiroLongo(String posivelNumero) {
@@ -83,14 +94,14 @@ public class Collatz {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * Imprime um exemplo de chamada da classe
 	 */
 	private static void printUsage() {
 		out.println("Use: java br.com.rjansen.desafios.Collatz <numero_inicial_collatz>\n<numero_inicial_collatz>=n\nn precisa ser um numero inteiro longo valido");
 	}
-	
+
 	public static void main(String[] args) {
 		final long startTime = currentTimeMillis();
 		final Long valorInicialCollatz;
@@ -108,15 +119,20 @@ public class Collatz {
 		for (long k = valorInicialCollatz; k > 0; k--) {
 			collatz.executa(k);
 			if (tamanhoMaiorSequencia < collatz.getSequenciaGerada().size()) {
-				tamanhoMaiorSequencia = new Long(collatz.getSequenciaGerada().size());
+				tamanhoMaiorSequencia = new Long(collatz.getSequenciaGerada()
+						.size());
 				valorInicialMaiorSequencia = k;
 				maiorSequencia = collatz.getSequenciaGerada();
 			}
 			collatz.limpaSequenciaGerada();
 		}
-		out.printf("Numero com Maior Sequencia Gerada: \n\tNumero Inicial=%s \n\tNumero com Maior Sequencia=%s \n\tTamanho da Sequencia=%s \n\tSequencia=%s\n", valorInicialCollatz, valorInicialMaiorSequencia, tamanhoMaiorSequencia, maiorSequencia);
+		out.printf(
+				"Numero com Maior Sequencia Gerada: \n\tNumero Inicial=%s \n\tNumero com Maior Sequencia=%s \n\tTamanho da Sequencia=%s \n\tSequencia=%s\n",
+				valorInicialCollatz, valorInicialMaiorSequencia,
+				tamanhoMaiorSequencia, maiorSequencia);
 		final long endTime = currentTimeMillis();
-		out.printf("****** Tempo Execucao Collatz: %dms ******\n", endTime - startTime);
+		out.printf("****** Tempo Execucao Collatz: %dms ******\n", endTime
+				- startTime);
 	}
 
 }
