@@ -13,6 +13,8 @@ import java.util.List;
  * Classe reponsável por resolver o desafio sobre a Subcadeia de soma maxima.
  * Desafio proposto:
  * 
+ *  Subcadeia de soma máxima
+ *  
  *  Dado um conjunto de números, descobrir o subconjunto em que a soma dos elementos são de máxima soma.
  *   
  *  Exemplo: dado o conjunto de elementos 
