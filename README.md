@@ -48,7 +48,6 @@ javac -sourcepath src\main\java -d target\classes src\main\java\br\com\rjansen\d
 ```
 
 ##Execução dos Desafios
-========================
 **Desafio Subcadeia de soma máxima:**
 ```shell
 #Unix Like
