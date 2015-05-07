@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.rjansen</groupId>
 	<artifactId>desafio-cadmus</artifactId>
-	<version>0.0.1</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>Desafio Cadmus</name>
 	<description>Conjunto de desafios propostos pela CADMUS</description>
 
@@ -17,7 +17,7 @@
 	<scm>
 		<url>https://github.com/rjansen/desafio-cadmus</url>
 		<developerConnection>scm:git:https://github.com/rjansen/desafio-cadmus.git</developerConnection>
-		<tag>desafio-cadmus-0.0.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<properties>
