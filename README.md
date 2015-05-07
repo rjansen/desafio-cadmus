@@ -10,7 +10,8 @@
     [2, -4, 6, 8, -10, 100, -6, 5]
     O subconjunto de soma máxima é:
     [2, -4, 6, 8, -10, 100, -6, 5]
-    Assim, o programa deve retornar a posição do primeiro e do último elemento da subcadeia. Neste exemplo, as posições 2 e 5, considerando a primeira posição com índice 0.
+    Assim, o programa deve retornar a posição do primeiro e do último elemento da subcadeia. 
+    Neste exemplo, as posições 2 e 5, considerando a primeira posição com índice 0.
     ```
 
   - Conjectura de Collatz
@@ -24,7 +25,9 @@
 
     13 40 20 10 5 16 8 4 2 1
 
-    O que pode ser observado dessa sequência (começando no 13 e terminando no 1) é que ela contém 10 itens. Embora ainda não       esteja matematicamente provado, é esperando que, dado um numero inteiro positivo qualquer, a sequencia sempre chegará em 1.
+    O que pode ser observado dessa sequência (começando no 13 e terminando no 1) é que ela contém 10 itens. 
+    Embora ainda não esteja matematicamente provado, é esperando que, dado um numero inteiro positivo qualquer, 
+    a sequencia sempre chegará em 1.
 
     Qual inteiro positivo abaixo de 1 milhão, produz a sequência com mais itens?
 
@@ -40,7 +43,9 @@
     M - Mover um passo para frente
     T - Se tele-transportar para uma determinada célula 
     
-    O robô anda em um plano cartesiano, em um espaço de tamanho especifico, com quatro direções Norte(N), Sul (S), Leste (E), Oeste (W). Ele não pode se mover ou tele transportar para fora desse espaço. O input do problema vem de um arquivo com o seguinte formato:
+    O robô anda em um plano cartesiano, em um espaço de tamanho especifico, com quatro direções Norte(N), Sul (S), Leste (E), Oeste (W). 
+    Ele não pode se mover ou tele transportar para fora desse espaço. 
+    O input do problema vem de um arquivo com o seguinte formato:
     
     1a linha: o tamanho do espaço que o robô pode usar - X<espaço>Y
     2a linha: localização inicial do robô e sua direção - X<espaço>Y<espaço>D
@@ -58,7 +63,7 @@
     
     2 4 E              # na posição 2 4, virado para Leste
     
-    Assuma que a célula imediatamente ao norte de (x, y) é (x, y + 1) e a leste é (x+1,y)
+    Assuma que a célula imediatamente ao norte de (x, y) é (x, y + 1) e a leste é (x + 1, y)
     ```
 
 ##Dependências
