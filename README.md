@@ -2,7 +2,8 @@
 Desafio Técnico
 - Foi utilizada a linguagem de progamação Java
 
-# Dependências:
+Dependências:
+=============
 - JDK 1.8+
 - Maven 3+
 - Baixe o maven em: http://maven.apache.org/download.cgi
