@@ -69,7 +69,11 @@
 
 ##Dependências
 - [JDK 1.8+](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- [Maven 3+](http://maven.apache.org/download.cgi) Opicional
+- [Maven 3+](http://maven.apache.org/download.cgi) Opcional
+  - Obrigatório para a execução dos testes  
+- JUnit 4 
+  - Depedência utilizada apenas para os testes
+  - Controlada pelo Maven
 
 ##Informações Gerais
 > Para a execução dos comandos de compilação e execução dos desafios é necessário estar posicionado no diretório raiz do projeto
