@@ -16,8 +16,8 @@ import java.util.List;
  *  
  *  A seguinte sequência iterativa é definida pelo conjunto de inteiros positivos onde:
  *
- *  n -> n/2 (se n é par) 
- *  n -> 3n + 1 (se n é impar)
+ *  n -\> n/2 (se n é par) 
+ *  n -\> 3n + 1 (se n é impar)
  *
  *  Usando as regras acima e começando pelo número 13, nós geraríamos a seguinte sequência:
  *
@@ -51,7 +51,7 @@ public class Collatz {
 
 	/**
 	 * Ececuta a conjectura de Collatz no número informado
-	 * @param numero - Numero aonde será aplicada a função
+	 * @param numeroInicial - Numero aonde será aplicada a função
 	 */
 	public void executa(Long numeroInicial) {
 		sequenciaGerada.clear();
