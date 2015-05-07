@@ -1,14 +1,16 @@
 # desafio-cadmus
-````````````````
+
 Desafio Técnico
 - Foi utilizada a linguagem de progamação Java
 
 Dependências:
 =============
+````````````````
 - JDK 1.8+
 - Maven 3+
 - Baixe o maven em: http://maven.apache.org/download.cgi
 - Para instalar basta descompactar e colocar a sua pasta bin no path do sistema operacional
+````````````````
 
 Para compilar e instalar execute na pasta raiz: 
 mvn clean install
