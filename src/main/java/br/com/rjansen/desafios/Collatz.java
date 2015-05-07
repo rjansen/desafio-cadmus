@@ -75,7 +75,7 @@ public class Collatz {
 	 * @param posivelNumero - Representação textual de um inteiro longo
 	 * @return true se for um inteiro longo e false caso contrário
 	 */
-	public static boolean isInteiroLongo(String posivelNumero) {
+	private static boolean isInteiroLongo(String posivelNumero) {
 		try {
 			Long.parseLong(posivelNumero);
 			return true;
@@ -87,7 +87,7 @@ public class Collatz {
 	/**
 	 * Imprime um exemplo de chamada da classe
 	 */
-	public static void printUsage() {
+	private static void printUsage() {
 		out.println("Use: java br.com.rjansen.desafios.Collatz <numero_inicial_collatz>\n<numero_inicial_collatz>=n\nn precisa ser um numero inteiro longo valido");
 	}
 	

@@ -24,7 +24,24 @@ import java.util.List;
  *  Assim, o programa deve retornar a posição do primeiro e do último elemento da subcadeia. Neste exemplo, as posições 2 e 5, considerando a primeira posição com índice 0.
  */
 public class SubcadeiaSomaMaxima {
+	
+	public static class CalculoErro extends RuntimeException {
+		private static final long serialVersionUID = -8474905293572094877L;
 
+		public CalculoErro(String message, Throwable cause,
+				Object... parametrosMensagem) {
+			super(String.format(message, parametrosMensagem), cause);
+		}
+
+		public CalculoErro(String message, Object... parametrosMensagem) {
+			super(String.format(message, parametrosMensagem));
+		}
+
+		public CalculoErro(Throwable cause) {
+			super(cause);
+		}
+	}
+	
 	/**
 	 * @author raphaeljansen
 	 *
@@ -83,6 +100,9 @@ public class SubcadeiaSomaMaxima {
 	 * @return ResultadoSubcadeiaMaxima - Retorna o valor da soma e a subcadeia
 	 */
 	public static ResultadoSubcadeiaMaxima calcula(List<Integer> cadeia) {
+		if (cadeia == null)
+			throw new CalculoErro("ParametroObrigatorio: cadeia");
+		
 		Integer maiorSoma = 0, inicioSubCadeia = 0, fimSubCadeia = 0;
 
 		for (int primeiro = 0; primeiro < cadeia.size(); primeiro++) {

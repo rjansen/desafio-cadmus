@@ -59,8 +59,104 @@ public class SistemaRobo {
 	/**
 	 * @author raphaeljansen
 	 * 
+	 *         Classe de erro pai. Nao pode ser instanciada, existe apenas para
+	 *         abstrair as funcoes de formatacao da memsagem de erro.
+	 * 
+	 */
+	public static abstract class ErroPai extends RuntimeException {
+		private static final long serialVersionUID = 2228269031176988218L;
+
+		public ErroPai(String message, Throwable cause,
+				Object... parametrosMensagem) {
+			super(String.format(message, parametrosMensagem), cause);
+		}
+
+		public ErroPai(String message, Object... parametrosMensagem) {
+			super(String.format(message, parametrosMensagem));
+		}
+
+		public ErroPai(Throwable cause) {
+			super(cause);
+		}
+	}
+
+	/**
+	 * @author raphaeljansen
+	 * 
+	 *         Classe para os erros de execucao do sistema.
+	 * 
+	 */
+	public static class ExecucaoErro extends ErroPai {
+		private static final long serialVersionUID = 3069564036531511623L;
+
+		public ExecucaoErro(String message, Object... parametrosMensagem) {
+			super(message, parametrosMensagem);
+		}
+
+		public ExecucaoErro(String message, Throwable cause,
+				Object... parametrosMensagem) {
+			super(message, cause, parametrosMensagem);
+		}
+
+		public ExecucaoErro(Throwable cause) {
+			super(cause);
+		}
+	}
+
+	/**
+	 * @author raphaeljansen
+	 * 
+	 *         Ocorre quando uma coordenada fora do plano cartesiano e
+	 *         encontrada.
+	 * 
+	 */
+	public static class CoordenadaInvalidaErro extends ErroPai {
+		private static final long serialVersionUID = -2782074373463610780L;
+
+		public CoordenadaInvalidaErro(String message,
+				Object... parametrosMensagem) {
+			super(message, parametrosMensagem);
+		}
+
+		public CoordenadaInvalidaErro(String message, Throwable cause,
+				Object... parametrosMensagem) {
+			super(message, cause, parametrosMensagem);
+		}
+
+		public CoordenadaInvalidaErro(Throwable cause) {
+			super(cause);
+		}
+	}
+
+	/**
+	 * @author raphaeljansen
+	 * 
+	 *         Ocorre quando um comando indevido e enviado para o sistema.
+	 *
+	 */
+	public static class ComandoInvalidoErro extends ErroPai {
+		private static final long serialVersionUID = -6266122395969583423L;
+
+		public ComandoInvalidoErro(String message, Object... parametrosMensagem) {
+			super(message, parametrosMensagem);
+		}
+
+		public ComandoInvalidoErro(String message, Throwable cause,
+				Object... parametrosMensagem) {
+			super(message, cause, parametrosMensagem);
+		}
+
+		public ComandoInvalidoErro(Throwable cause) {
+			super(cause);
+		}
+	}
+
+	/**
+	 * @author raphaeljansen
+	 * 
 	 *         Representa um ponto no plano cartesiano x = indica a coluna no
 	 *         plano cartesiano y = indica a linha no plano cartesiano
+	 * 
 	 */
 	public static class Coordenada {
 		private final Integer x;
@@ -78,6 +174,37 @@ public class SistemaRobo {
 
 		public Integer getY() {
 			return y;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result + ((x == null) ? 0 : x.hashCode());
+			result = prime * result + ((y == null) ? 0 : y.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Coordenada other = (Coordenada) obj;
+			if (x == null) {
+				if (other.x != null)
+					return false;
+			} else if (!x.equals(other.x))
+				return false;
+			if (y == null) {
+				if (other.y != null)
+					return false;
+			} else if (!y.equals(other.y))
+				return false;
+			return true;
 		}
 
 		@Override
@@ -110,8 +237,8 @@ public class SistemaRobo {
 					return direcao;
 				}
 			}
-			throw new RuntimeException(String.format(
-					"ImpossivelObterDirecaoPeloApelido: Apelido=[%s]", apelido));
+			throw new ExecucaoErro(
+					"ImpossivelObterDirecaoPeloApelido: Apelido=[%s]", apelido);
 		}
 	}
 
@@ -138,6 +265,36 @@ public class SistemaRobo {
 
 		public Direcao getDirecao() {
 			return direcao;
+		}
+
+		@Override
+		public int hashCode() {
+			final int prime = 31;
+			int result = 1;
+			result = prime * result
+					+ ((coordenada == null) ? 0 : coordenada.hashCode());
+			result = prime * result
+					+ ((direcao == null) ? 0 : direcao.hashCode());
+			return result;
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Posicao other = (Posicao) obj;
+			if (coordenada == null) {
+				if (other.coordenada != null)
+					return false;
+			} else if (!coordenada.equals(other.coordenada))
+				return false;
+			if (direcao != other.direcao)
+				return false;
+			return true;
 		}
 
 		@Override
@@ -176,20 +333,19 @@ public class SistemaRobo {
 					&& coordenada.getY() <= linhas;
 		}
 
+		public void validaCoordenada(Coordenada coordenada) {
+			if (!existeCoordenada(coordenada)) {
+				throw new CoordenadaInvalidaErro(
+						"CoordenadaForaLimite: Limite=%sx%s Coordenada=%s",
+						linhas, colunas, coordenada);
+			}
+		}
+
 		@Override
 		public String toString() {
 			return String.format("PlanoCartesiano [linhas=%s, colunas=%s]",
 					linhas, colunas);
 		}
-
-		public void validaCoordenada(Coordenada coordenada) {
-			if (!existeCoordenada(coordenada)) {
-				throw new RuntimeException(String.format(
-						"CoordenadaForaLimite: Limite=%sx%s Coordenada=%s",
-						linhas, colunas, coordenada));
-			}
-		}
-
 	}
 
 	/**
@@ -237,13 +393,10 @@ public class SistemaRobo {
 				direcaoNova = Direcao.SUL;
 				break;
 			default:
-				throw new RuntimeException(String.format(
-						"DirecaoInvalida: Direcao=%s", direcaoAtual));
+				throw new ExecucaoErro("DirecaoInvalida: Direcao=%s",
+						direcaoAtual);
 			}
-			final Posicao novaPosicao = new Posicao(posicao.getCoordenada(),
-					direcaoNova);
-			planoCartesiano.validaCoordenada(novaPosicao.getCoordenada());
-			this.posicao = novaPosicao;
+			alterarPosicao(new Posicao(posicao.getCoordenada(), direcaoNova));
 		}
 
 		public void virarDireita() {
@@ -263,13 +416,10 @@ public class SistemaRobo {
 				direcaoNova = Direcao.NORTE;
 				break;
 			default:
-				throw new RuntimeException(String.format(
-						"DirecaoInvalida: Direcao=%s", direcaoAtual));
+				throw new ExecucaoErro("DirecaoInvalida: Direcao=%s",
+						direcaoAtual);
 			}
-			final Posicao novaPosicao = new Posicao(posicao.getCoordenada(),
-					direcaoNova);
-			planoCartesiano.validaCoordenada(novaPosicao.getCoordenada());
-			this.posicao = novaPosicao;
+			alterarPosicao(new Posicao(posicao.getCoordenada(), direcaoNova));
 		}
 
 		public void mover() {
@@ -294,20 +444,20 @@ public class SistemaRobo {
 						coordenadaAtual.getY());
 				break;
 			default:
-				throw new RuntimeException(String.format(
-						"DirecaoInvalida: Direcao=%s", direcaoAtual));
+				throw new ExecucaoErro("DirecaoInvalida: Direcao=%s",
+						direcaoAtual);
 			}
-			final Posicao novaPosicao = new Posicao(coordenadaNova,
-					direcaoAtual);
-			planoCartesiano.validaCoordenada(novaPosicao.getCoordenada());
-			this.posicao = novaPosicao;
+			alterarPosicao(new Posicao(coordenadaNova, direcaoAtual));
 		}
 
 		public void teletransportar(Integer x, Integer y) {
-			final Posicao novaPosicao = new Posicao(new Coordenada(x, y),
-					posicao.getDirecao());
-			planoCartesiano.validaCoordenada(novaPosicao.getCoordenada());
-			this.posicao = novaPosicao;
+			alterarPosicao(new Posicao(new Coordenada(x, y),
+					posicao.getDirecao()));
+		}
+
+		private void alterarPosicao(final Posicao posicaoNova) {
+			planoCartesiano.validaCoordenada(posicaoNova.getCoordenada());
+			this.posicao = posicaoNova;
 		}
 	}
 
@@ -336,8 +486,8 @@ public class SistemaRobo {
 					return comando;
 				}
 			}
-			throw new RuntimeException(String.format(
-					"ImpossivelObterComandoPeloApelido: Apelido=[%s]", apelido));
+			throw new ExecucaoErro(
+					"ImpossivelObterComandoPeloApelido: Apelido=[%s]", apelido);
 		}
 	}
 
@@ -379,6 +529,9 @@ public class SistemaRobo {
 				robo.teletransportar(Integer.valueOf(parametros.get(0)),
 						Integer.valueOf(parametros.get(1)));
 				break;
+			default:
+				throw new ExecucaoErro("TipoComandoInvalido: TipoComando=%s",
+						tipoComando);
 			}
 		}
 
@@ -422,14 +575,13 @@ public class SistemaRobo {
 			final Matcher matcher = TAMAMHO_ESPACO_PATTERN.matcher(cmdPosicao);
 			if (matcher.find()) {
 				final PlanoCartesiano planoCartesiano = new PlanoCartesiano(
-						Integer.valueOf(matcher.group("linhas")),
-						Integer.valueOf(matcher.group("colunas")));
+						Integer.parseInt(matcher.group("linhas")),
+						Integer.parseInt(matcher.group("colunas")));
 				return planoCartesiano;
 			} else {
-				throw new RuntimeException(
-						String.format(
-								"ImpossivelConverterPosicao: Comando_PlanoCartesiano=[%s]",
-								cmdPosicao));
+				throw new ComandoInvalidoErro(
+						"ComandoPlanoCartesianoInvalido: Comando_PlanoCartesiano=[%s]",
+						cmdPosicao);
 			}
 		}
 
@@ -438,15 +590,14 @@ public class SistemaRobo {
 			final Matcher matcher = POSICAO_PATTERN.matcher(cmdPosicao);
 			if (matcher.find()) {
 				final Posicao posicao = new Posicao(new Coordenada(
-						Integer.valueOf(matcher.group("x")),
-						Integer.valueOf(matcher.group("y"))),
+						Integer.parseInt(matcher.group("x")),
+						Integer.parseInt(matcher.group("y"))),
 						Direcao.valorPeloApelido(matcher.group("direcao")));
 				return posicao;
 			} else {
-				throw new RuntimeException(
-						String.format(
-								"ImpossivelConverterPosicao: Comando_PosicaoInicial=[%s]",
-								cmdPosicao));
+				throw new ComandoInvalidoErro(
+						"ComandoPosicaoInicialInvalido: Comando_PosicaoInicial=[%s]",
+						cmdPosicao);
 			}
 		}
 
@@ -454,26 +605,34 @@ public class SistemaRobo {
 			final List<Comando> listaComandos = new ArrayList<>();
 			final List<String> comandoRoboLista = this.comandos.subList(2,
 					this.comandos.size());
-			for (final String comandoRobo : comandoRoboLista) {
-				final Matcher matcher = COMANDOS_PATTERN.matcher(comandoRobo);
-				while (matcher.find()) {
-					final TipoComando tipoComando = TipoComando
-							.valorPeloApelido(matcher.group("comando"));
-					final List<String> comandoParametros = new ArrayList<>();
-					if (tipoComando == TipoComando.TELETRANSPORTAR) {
-						comandoParametros.add(matcher.group("x"));
-						comandoParametros.add(matcher.group("y"));
+			try {
+				for (final String comandoRobo : comandoRoboLista) {
+					final Matcher matcher = COMANDOS_PATTERN
+							.matcher(comandoRobo);
+					while (matcher.find()) {
+						final TipoComando tipoComando = TipoComando
+								.valorPeloApelido(matcher.group("comando"));
+						final List<String> comandoParametros = new ArrayList<>();
+						if (tipoComando == TipoComando.TELETRANSPORTAR) {
+							final String x = matcher.group("x");
+							final String y = matcher.group("y");
+							Integer.parseInt(x);
+							Integer.parseInt(y);
+							comandoParametros.add(x);
+							comandoParametros.add(y);
+						}
+						listaComandos.add(new Comando(tipoComando,
+								comandoParametros
+										.toArray(new String[comandoParametros
+												.size()])));
 					}
-					listaComandos.add(new Comando(tipoComando,
-							comandoParametros
-									.toArray(new String[comandoParametros
-											.size()])));
 				}
+			} catch (Exception e) {
+				throw new ComandoInvalidoErro(e);
 			}
 			if (listaComandos.isEmpty()) {
-				throw new RuntimeException(String.format(
-						"ImpossivelConverterComandos: Comandos_Robo=[%s]",
-						comandoRoboLista));
+				out.printf("ListaComandosVazia: Comandos_Robo=[%s]",
+						comandoRoboLista);
 			}
 			return listaComandos;
 		}
@@ -528,20 +687,24 @@ public class SistemaRobo {
 			interpretadorComandos.carregaComandos();
 			final PlanoCartesiano planoCartesiano = interpretadorComandos
 					.getPlanoCartesiano();
+			out.printf("PlanoCartesiano: %s\n", planoCartesiano);
 			final Posicao posicaoInicial = interpretadorComandos
 					.getPosicaoIncicial();
+			out.printf("PosicaoInicial: %s\n", posicaoInicial);
 			final Robo robo = new Robo(planoCartesiano, posicaoInicial);
 			final List<Comando> comandoRoboLista = interpretadorComandos
 					.getComandos();
 			for (final Comando comandoRobo : comandoRoboLista) {
-				out.printf("%s\n", comandoRobo);
 				comandoRobo.executar(robo);
+				out.printf("Executado: %s PosicaoRobo=%s\n", comandoRobo,
+						robo.getPosicao());
 			}
 			return new ResultadoSistemaRobo(robo.getPosicaoInicial(),
 					robo.getPosicao());
+		} catch (ErroPai erroPai) {
+			throw erroPai;
 		} catch (Exception e) {
-			e.printStackTrace();
-			throw new RuntimeException(e);
+			throw new ExecucaoErro(e);
 		}
 	}
 
@@ -576,5 +739,4 @@ public class SistemaRobo {
 				"****** Tempo Execucao Subcadeia Soma Maxima: %dms ******\n",
 				endTime - startTime);
 	}
-
 }

@@ -3,4 +3,3 @@
 LLRRMMMRLRMMM      # um conjunto de comandos
 T 1 3              # o robô se tele transporta para o ponto (1,3)
 LLRRMMRMMRM        # um outro conjunto de comandos
-T 1 10              # o robô se tele transporta para o ponto (1,3)
