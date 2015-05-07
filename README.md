@@ -2,7 +2,7 @@
 Desafio Técnico
 - Foi utilizada a linguagem de progamação Java
 
-Dependencias:
+# Dependências:
 - JDK 1.8+
 - Maven 3+
 - Baixe o maven em: http://maven.apache.org/download.cgi
@@ -15,10 +15,10 @@ Para executar cada desafio faça:
 - utilize o shell de comandos e execute um cd para a pasta target na raiz do projeto.
 - O diretório corrente deve ser o desafio-cadmus
 
-Windows:
+# Windows:
 - c:\desafio-cadmus>cd target\classes
 
-Baseados em Unix:
+# Baseados em Unix:
 - desafio-cadmus$ cd target/classes/
 
 Subcadeia de soma máxima:
