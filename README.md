@@ -49,7 +49,8 @@
     
     1a linha: o tamanho do espaço que o robô pode usar - X<espaço>Y
     2a linha: localização inicial do robô e sua direção - X<espaço>Y<espaço>D
-    3a linha em diante: comandos do robô sem separação. A exceção é o comando de teletransporte, que deve ficar em sua própria linha com o seguinte formato - T<espaço>X<espaço>Y
+    3a linha em diante: comandos do robô sem separação. 
+    A exceção é o comando de teletransporte, que deve ficar em sua própria linha com o seguinte formato - T<espaço>X<espaço>Y
     
     Um exemplo (sem os comentários):
     
