@@ -69,20 +69,24 @@
 
 ##Dependências
 - [JDK 1.8+](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
-- [Maven 3+](http://maven.apache.org/download.cgi) Opicional
+- [Maven 3+](http://maven.apache.org/download.cgi) Opcional
+  - Obrigatório para a execução dos testes  
+- JUnit 4 
+  - Depedência utilizada apenas para os testes
+  - Controlada pelo Maven
 
 ##Informações Gerais
 > Para a execução dos comandos de compilação e execução dos desafios é necessário estar posicionado no diretório raiz do projeto
 
 ##Compilação do Projeto
 ###Utilizando o Apache Maven
-```shell
+```sh
 mvn clean install
 ```
 
 ###Utilizando o Javac
 **Desafio Subcadeia de soma máxima:**
-```shell
+```sh
 #Unix Like
 javac -sourcepath src/main/java -d target/classes src/main/java/br/com/rjansen/desafios/SubcadeiaSomaMaxima.java
 
@@ -91,7 +95,7 @@ javac -sourcepath src\main\java -d target\classes src\main\java\br\com\rjansen\d
 ```
 
 **Desafio Conjectura de Collatz**
-```shell
+```sh
 #Unix Like
 javac -sourcepath src/main/java -d target/classes src/main/java/br/com/rjansen/desafios/Collatz.java
 
@@ -100,7 +104,7 @@ javac -sourcepath src\main\java -d target\classes src\main\java\br\com\rjansen\d
 ```
 
 **Desafio Sistema Robô**
-```shell
+```sh
 #Unix Like
 javac -sourcepath src/main/java -d target/classes src/main/java/br/com/rjansen/desafios/SistemaRobo.java
 
@@ -110,7 +114,7 @@ javac -sourcepath src\main\java -d target\classes src\main\java\br\com\rjansen\d
 
 ##Execução dos Desafios
 **Desafio Subcadeia de soma máxima:**
-```shell
+```sh
 #Unix Like
 java -cp target/classes/ br.com.rjansen.desafios.SubcadeiaSomaMaxima [cadeia]
 
@@ -122,7 +126,7 @@ java -cp target\classes\ br.com.rjansen.desafios.SubcadeiaSomaMaxima [cadeia]
 - n precisa ser um numero inteiro valido
 
 **Desafio Conjectura de Collatz**
-```shell
+```sh
 #Unix Like
 java -cp target/classes/ br.com.rjansen.desafios.Collatz [numero_inicial_collatz]
 
@@ -134,7 +138,7 @@ java -cp target\classes\ br.com.rjansen.desafios.Collatz [numero_inicial_collatz
 - n precisa ser um numero inteiro longo valido
 
 **Desafio Sistema Robô**
-```shell
+```sh
 #Unix Like
 java -cp target/classes/ br.com.rjansen.desafios.SistemaRobo [arquivo_comandos]
 
@@ -143,3 +147,10 @@ java -cp target\classes\ br.com.rjansen.desafios.SistemaRobo [arquivo_comandos]
 ```
 **Onde:**
 - [arquivo_comandos]=/caminho_arquivo/comandos
+
+##Execução dos Testes
+> Para a execução dos testes é necessário que o maven esteja instalado e configurado corretamente.
+
+```sh
+mvn surefire:test -Pteste
+```
