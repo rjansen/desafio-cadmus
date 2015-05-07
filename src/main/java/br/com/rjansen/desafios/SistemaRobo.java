@@ -32,11 +32,11 @@ import java.util.regex.Pattern;
  *         (W). Ele não pode se mover ou tele transportar para fora desse
  *         espaço. O input do problema vem de um arquivo com o seguinte formato:
  *
- *         1a linha: o tamanho do espaço que o robô pode usar - X\<espaço\>Y 2a
+ *         1a linha: o tamanho do espaço que o robô pode usar - X[espaço]Y 2a
  *         linha: localização inicial do robô e sua direção -
- *         X\<espaço\>Y\<espaço\>D 3a linha em diante: comandos do robô sem
+ *         X[espaço]Y[espaço]D 3a linha em diante: comandos do robô sem
  *         separação. A exceção é o comando de teletransporte, que deve ficar em
- *         sua própria linha com o seguinte formato - T\<espaço\>X\<espaço\>Y
+ *         sua própria linha com o seguinte formato - T[espaço]X[espaço]Y
  *
  *         Um exemplo (sem os comentários):
  *

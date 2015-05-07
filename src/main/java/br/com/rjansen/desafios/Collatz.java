@@ -16,8 +16,8 @@ import java.util.List;
  *  
  *  A seguinte sequência iterativa é definida pelo conjunto de inteiros positivos onde:
  *
- *  n -\> n/2 (se n é par) 
- *  n -\> 3n + 1 (se n é impar)
+ *  n = n/2 (se n é par) 
+ *  n = 3n + 1 (se n é impar)
  *
  *  Usando as regras acima e começando pelo número 13, nós geraríamos a seguinte sequência:
  *
@@ -36,7 +36,7 @@ public class Collatz {
 	
 	/**
 	 * Retorna uma cópia da sequencia gerada.
-	 * @return List<Long> - Lista de inteiros longos que representa a sequencia gerada
+	 * @return List - Lista de inteiros longos que representa a sequencia gerada
 	 */
 	public List<Long> getSequenciaGerada() {
 		return new ArrayList<Long>(sequenciaGerada);
