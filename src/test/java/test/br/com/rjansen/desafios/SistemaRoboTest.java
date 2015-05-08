@@ -29,6 +29,8 @@ import br.com.rjansen.desafios.SistemaRobo.ResultadoSistemaRobo;
  */
 public class SistemaRoboTest {
 
+	private static String OS = System.getProperty("os.name").toLowerCase();
+	
 	/**
 	 * Indetifica um recurso e retorna seu caminho fisico completo.
 	 * 
@@ -37,10 +39,15 @@ public class SistemaRoboTest {
 	 */
 	private static String encontraCaminhaCompleto(String nomeRecurso) {
 		final URL resource = SistemaRoboTest.class.getResource(nomeRecurso);
-		final String caminhoCompleto = resource.toExternalForm().replace(
+		final String caminhoCompleto;
+		if (OS.indexOf("win") >= 0) {
+			caminhoCompleto = resource.toExternalForm().replace(
+				"file:/", "");
+		} else {
+			caminhoCompleto = resource.toExternalForm().replace(
 				"file:", "");
-		System.out.printf("AchouCaminho: URIRecurso=%s CaminhoCompleto=\n",
-				resource, caminhoCompleto);
+		}
+		//System.out.printf("AchouCaminho: URIRecurso=%s CaminhoCompleto=%s\n", resource, caminhoCompleto);
 		return caminhoCompleto;
 	}
 
