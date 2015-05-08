@@ -76,7 +76,9 @@
   - Controlada pelo Maven
 
 ##Informações Gerais
-> Para a execução dos comandos de compilação e execução dos desafios é necessário estar posicionado no diretório raiz do projeto
+> - Para a execução dos comandos de compilação e execução dos desafios é necessário estar posicionado no diretório raiz do projeto
+> - Para a compilação do projeto sem a biblioteca maven é necessário criar o diretório target/classes antes de executar o comando de compilação
+> - O jdk precisa estar corretamente configurado, possibilitando a chamada do javac e do java em qualquer pasta do sistema de arquivos
 
 ##Compilação do Projeto
 ###Utilizando o Apache Maven
