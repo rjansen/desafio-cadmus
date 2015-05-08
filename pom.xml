@@ -10,7 +10,8 @@
 		<repository>
 			<id>meuRepositorioLocal</id>
 			<name>meuRepositorioLocal</name>
-			<url>file:///Users/raphaeljansen/.m2/repository</url>
+			<!--<url>file:///Users/raphaeljansen/.m2/repository</url>-->
+			<url>file://C:/Users/raphael.pereira/.m2/repository</url>
 		</repository>
 	</distributionManagement>
 
